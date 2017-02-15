@@ -95,14 +95,15 @@
     /**
      * Базовый класс
      */
-    function Board (n,m,char,idDiv) {
+    function Board (n,m,idDiv) {
       var table, tr, td;
+      var self = this;
       function upDownRow(m) {                   // Рисуем верхнюю и нижнюю строчки доски 
         tr = document.createElement('tr');      
         for (var j = 0; j < m+2; j++) {         
           td = document.createElement('td');    
-          td.innerHTML = char[j];               
-          td.className = 'upDownRow';           
+          td.innerHTML = self.char[j];               
+          td.className = self.classUpDownRow;           
           tr.appendChild(td);                   
         }                                       
         table.appendChild(tr);                  
@@ -110,7 +111,7 @@
       function firstLastTd(n, i) {              // Рисуем левое и правое поле доски с цифровым обозначением
         td = document.createElement('td');      
         td.innerHTML = n-i;                     
-        td.className = 'firstLastTd'            
+        td.className = self.classFirstLastTd;           
         tr.appendChild(td);                     
       }
       /**
@@ -123,13 +124,11 @@
         firstLastTd(n, i);                                                              
         for (var j = 0; j < m; j++) {                                                    
           td = document.createElement('td');                                            
-          td.className = 'classTd';
-          td.id = char[j+1] + (n-i);
-          td.classList.add((i+j)%2 ? 'classBlack' : 'classWhite');  
-          /*if (i==n-2 || i==1) td.innerHTML = pawn;                                         
-          if (i==n-1 || i==0) td.innerHTML = figer[j];*/                                  
-          if (i==n-2 || i==n-1) td.classList.add('classColorBlack');                    
-          if (i==0 || i==1) td.classList.add('classColorWhite');                        
+          td.className = self.classTd;
+          td.id = self.char[j+1] + (n-i);
+          td.classList.add((i+j)%2 ? self.classBlack : self.classWhite);                                   
+          if (i==n-2 || i==n-1) td.classList.add(self.classColorBlack);                    
+          if (i==0 || i==1) td.classList.add(self.classColorWhite);                        
           tr.appendChild(td);                                                           
         }                                                                               
         firstLastTd(n, i);                                                              
@@ -137,7 +136,7 @@
       }                                                                                 
       upDownRow(m);                                                                     
       document.getElementById(idDiv).appendChild(table);                                  
-      table.className = 'classTable';
+      table.className = self.classTable;
     } 
     /**
      * Класс конструктор
@@ -145,8 +144,16 @@
     function ChessBoard(idDiv) {
       var n=8; 
       var m=8; 
-      var char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];              // Обозначение столбцов на доске
-      Board.call(this, n, m, char, idDiv);
+      this.char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];              // Обозначение столбцов на доске
+      this.classUpDownRow = 'upDownRow';
+      this.classFirstLastTd = 'FirstLastTd';
+      this.classTd = 'classTd';
+      this.classBlack = 'classBlack';
+      this.classWhite = 'classWhite';
+      this.classColorBlack = 'classColorBlack';
+      this.classColorWhite = 'classColorWhite';
+      this.classTable = 'classTable';
+      Board.call(this, n, m, idDiv);
       /**
        *  Установка активной ячейки
        */
