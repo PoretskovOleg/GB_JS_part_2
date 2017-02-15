@@ -93,7 +93,7 @@
   <script>
     'use strict';
     /**
-     * Базовый класс
+     * Базовый класс - рисует шахматную доску размером m*n
      */
     function Board (n,m,idDiv) {
       var table, tr, td;
@@ -149,7 +149,7 @@
        */
       this.char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];              // Обозначение столбцов на доске
       this.classUpDownRow = 'upDownRow';
-      this.classFirstLastTd = 'FirstLastTd';
+      this.classFirstLastTd = 'firstLastTd';
       this.classTd = 'classTd';
       this.classBlack = 'classBlack';
       this.classWhite = 'classWhite';
