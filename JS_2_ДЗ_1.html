@@ -143,7 +143,10 @@
      */
     function ChessBoard(idDiv) {
       var n=8; 
-      var m=8; 
+      var m=8;
+      /**
+       * Создаем свойства объекта
+       */
       this.char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];              // Обозначение столбцов на доске
       this.classUpDownRow = 'upDownRow';
       this.classFirstLastTd = 'FirstLastTd';
@@ -153,9 +156,12 @@
       this.classColorBlack = 'classColorBlack';
       this.classColorWhite = 'classColorWhite';
       this.classTable = 'classTable';
+      /**
+       * Наследование шахматной доски
+       */
       Board.call(this, n, m, idDiv);
       /**
-       *  Установка активной ячейки
+       *  Создаем метод установки активной ячейки
        */
       this.setActiveCell = function (coord) {
         var tds;
@@ -164,7 +170,7 @@
         document.getElementById(coord.toUpperCase()).classList.add('activeTd');
       }
       /**
-       *  Вывод координат активной ячейки
+       *  Саздаем метод вывода координат активной ячейки
        */
       this.getActiveCell = function (classDiv) {
         var tds;
@@ -175,7 +181,7 @@
         };
       }
       /**
-       *  Подписка на события
+       *  Создаем метод подписки на события
        */
       this.on = function (event, func) {
         var td = document.getElementsByClassName('classTd');
