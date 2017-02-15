@@ -126,7 +126,9 @@
           td = document.createElement('td');                                            
           td.className = self.classTd;
           td.id = self.char[j+1] + (n-i);
-          td.classList.add((i+j)%2 ? self.classBlack : self.classWhite);                                   
+          td.classList.add((i+j)%2 ? self.classBlack : self.classWhite);
+          if (i==n-2 || i==1) td.innerHTML = self.pawn;                                      
+          if (i==n-1 || i==0) td.innerHTML = self.figer[j];                                                                   
           if (i==n-2 || i==n-1) td.classList.add(self.classColorBlack);                    
           if (i==0 || i==1) td.classList.add(self.classColorWhite);                        
           tr.appendChild(td);                                                           
@@ -147,6 +149,8 @@
       /**
        * Создаем свойства объекта
        */
+      this.figer = ['&#9814;', '&#9816;', '&#9815;', '&#9813;', '&#9812;', '&#9815;', '&#9816;', '&#9814;'];
+      this.pawn = '&#9817;'
       this.char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];              // Обозначение столбцов на доске
       this.classUpDownRow = 'upDownRow';
       this.classFirstLastTd = 'firstLastTd';
