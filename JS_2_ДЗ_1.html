@@ -156,6 +156,7 @@
       this.classColorBlack = 'classColorBlack';
       this.classColorWhite = 'classColorWhite';
       this.classTable = 'classTable';
+      this.classActiveTd = 'activeTd'
       /**
        * Наследование шахматной доски
        */
@@ -165,16 +166,16 @@
        */
       this.setActiveCell = function (coord) {
         var tds;
-        tds = document.getElementsByClassName('activeTd');
-        if (tds[0]) tds[0].classList.remove('activeTd');
-        document.getElementById(coord.toUpperCase()).classList.add('activeTd');
+        tds = document.getElementsByClassName(this.classActiveTd);
+        if (tds[0]) tds[0].classList.remove(this.classActiveTd);
+        document.getElementById(coord.toUpperCase()).classList.add(this.classActiveTd);
       }
       /**
        *  Саздаем метод вывода координат активной ячейки
        */
       this.getActiveCell = function (classDiv) {
         var tds;
-        tds = document.getElementsByClassName('activeTd');
+        tds = document.getElementsByClassName(this.classActiveTd);
         if (tds[0]) {
           var divs = document.getElementsByClassName(classDiv);
           divs[0].innerHTML = tds[0].id
@@ -184,7 +185,7 @@
        *  Создаем метод подписки на события
        */
       this.on = function (event, func) {
-        var td = document.getElementsByClassName('classTd');
+        var td = document.getElementsByClassName(this.classTd);
         for (var i = 0; i < td.length; i++) {
           td[i].addEventListener(event, func);
         }
