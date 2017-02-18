@@ -141,13 +141,24 @@
       /**
        *  Создаем метод вывода фигур
        */
-      Board.prototype.printFigures = function (figures) {
+      Board.prototype.printFigures = function (files) {
         var self = this;
-        figures.forEach(function(item) {
-          var elem = document.getElementById(item.id);
-          elem.innerHTML = item.imageFigure;
-          elem.classList.add(item.color == 'Black' ? self.classColorBlack : self.classColorWhite);
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', files, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState != 4) return;
+          if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText);
+          } else {
+              var data = JSON.parse(xhr.responseText)
+              data.forEach(function(item) {
+                var elem = document.getElementById(item.id);
+                elem.innerHTML = item.imageFigure;
+                elem.classList.add(item.color == 'Black' ? self.classColorBlack : self.classColorWhite);
+              });
+            };
+        }; 
       };
       /**
        *  Создаем метод удаления фигуры
@@ -221,6 +232,7 @@
 
     var chess = new ChessBoard('divChess');
     chess.printChess();
+    chess.printFigures('chessFigures.json');
     chess.setActiveCell('c3');
     chess.getActiveCell('classPrintCoord');
 
@@ -236,18 +248,8 @@
     chess.on('click', activeTd);
     chess.on('click', print);
     chess.on('click', delFig);
+    
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'chessFigures.json', true);
-    xhr.send();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-      if (xhr.status != 200) {
-        alert(xhr.status + ': ' + xhr.statusText);
-      } else {
-         chess.printFigures(JSON.parse(xhr.responseText));
-        };
-    };
   </script>
 </body>
 </html>
