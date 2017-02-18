@@ -239,14 +239,14 @@
     function activeTd () {                              // Обработчик события - делает ячейку активной
       chess.setActiveCell(this.id);
     }
-    function print() {                                  // Обработчик события - выводит координаты активной ячейки
+    function printCoord() {                           // Обработчик события - выводит координаты активной ячейки
       chess.getActiveCell('classPrintCoord');
     }
     function delFig () {                              // Обработчик события - удаляет фигуру
       chess.deleteFigures(this.id);
     }
     chess.on('click', activeTd);
-    chess.on('click', print);
+    chess.on('click', printCoord);
     chess.on('click', delFig);
     
 
