@@ -2,161 +2,193 @@
     {
         "id": "A1",
         "imageFigure": "&#9814;",
-        "color": "Black"
+        "color": "Black",
+        "name": "rook"
     },
     {
         "id": "B1",
         "imageFigure": "&#9816;",
-        "color": "Black"
+        "color": "Black",
+        "name": "knight"
     },
     {
         "id": "C1",
         "imageFigure": "&#9815;",
-        "color": "Black"
+        "color": "Black",
+        "name": "bishop"
     },
     {
         "id": "D1",
         "imageFigure": "&#9813;",
-        "color": "Black"
+        "color": "Black",
+        "name": "king"
     },
     {
         "id": "E1",
         "imageFigure": "&#9812;",
-        "color": "Black"
+        "color": "Black",
+        "name": "queen"
     },
     {
         "id": "F1",
         "imageFigure": "&#9815;",
-        "color": "Black"
+        "color": "Black",
+        "name": "bishop"
     },
     {
         "id": "G1",
         "imageFigure": "&#9816;",
-        "color": "Black"
+        "color": "Black",
+        "name": "knight"
     },
     {
         "id": "H1",
         "imageFigure": "&#9814;",
-        "color": "Black"
+        "color": "Black",
+        "name": "rook"
     },
     {
         "id": "A2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "B2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "C2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "D2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "E2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "F2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "G2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "H2",
         "imageFigure": "&#9817;",
-        "color": "Black"
+        "color": "Black",
+        "name": "pawn"
     },
     {
         "id": "A8",
         "imageFigure": "&#9814;",
-        "color": "White"
+        "color": "White",
+        "name": "rook"
     },
     {
         "id": "B8",
         "imageFigure": "&#9816;",
-        "color": "White"
+        "color": "White",
+        "name": "knight"
     },
     {
         "id": "C8",
         "imageFigure": "&#9815;",
-        "color": "White"
+        "color": "White",
+        "name": "bishop"
     },
     {
         "id": "D8",
         "imageFigure": "&#9813;",
-        "color": "White"
+        "color": "White",
+        "name": "king"
     },
     {
         "id": "E8",
         "imageFigure": "&#9812;",
-        "color": "White"
+        "color": "White",
+        "name": "queen"
     },
     {
         "id": "F8",
         "imageFigure": "&#9815;",
-        "color": "White"
+        "color": "White",
+        "name": "bishop"
     },
     {
         "id": "G8",
         "imageFigure": "&#9816;",
-        "color": "White"
+        "color": "White",
+        "name": "knight"
     },
     {
         "id": "H8",
         "imageFigure": "&#9814;",
-        "color": "White"
+        "color": "White",
+        "name": "rook"
     },
     {
         "id": "A7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "B7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "C7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "D7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "E7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "F7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "G7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     },
     {
         "id": "H7",
         "imageFigure": "&#9817;",
-        "color": "White"
+        "color": "White",
+        "name": "pawn"
     }
 ]
