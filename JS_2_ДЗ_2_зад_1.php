@@ -16,7 +16,7 @@
         ul.appendChild(li);
       });
       list.appendChild(ul);
-    };
+    }
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'phones.json', true);
@@ -24,11 +24,11 @@
     xhr.onreadystatechange = function() {
       if (xhr.readyState != 4) return;
       if (xhr.status != 200) {
-        alert(xhr.status + ': ' + xhr.statusText);
+        console.log(xhr.status + ': ' + xhr.statusText);
       } else {
          printNamePhones(JSON.parse(xhr.responseText));
         };
-    };
+    }
   </script>
 
   <div id = "list_phones"> </div>
