@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title> Урок 2 Задание 3 </title>
   <style>
-    .classTd {                         /*Класс для ячеек основной доски*/
+    .td {                         /*Класс для ячеек основной доски*/
       height: 50px; 
       width: 50px;
       text-align: center;
@@ -12,20 +12,20 @@
       font-size: 40px;
     }
 
-    .classWhite {                      /*Класс для белых ячеек*/
+    .white {                      /*Класс для белых ячеек*/
       background: #ccc;
     }
 
-    .classBlack {                      /*Класс для черных ячеек*/
+    .black {                      /*Класс для черных ячеек*/
       background: #222;
     }
 
-    .classColorWhite {                 /*Класс для черных фигур*/
+    .colorWhite {                 /*Класс для черных фигур*/
       color: white;
       font-weight: bold;
     }
 
-    .classColorBlack {                 /*Класс для черных фигур*/
+    .colorBlack {                 /*Класс для черных фигур*/
       color: black;
       font-weight: bold;
     }
@@ -42,7 +42,7 @@
       background: lightyellow;
     }
 
-    .classTable {                      /*Класс для таблицы*/
+    .table {                      /*Класс для таблицы*/
       border: 2px solid black;
       border-collapse:	collapse;
       margin: 50px auto 10px auto;	
@@ -52,14 +52,14 @@
       outline: 2px solid blue;        
     }
 
-    .classPrintCoord {                 /*Класс для раздела координат ячеек*/
+    .printCoord {                 /*Класс для раздела координат ячеек*/
       font-size: 30px;
       color: blue;
       width: 50px;
       height: 50px;
       margin: 10px auto 10px auto;
     }
-    .classDeleteWhite {                /*Класс для области удаленных белых фигур*/
+    .deleteWhite {                /*Класс для области удаленных белых фигур*/
       background-color: #111;
       width: 800px;
       height: 60px;
@@ -69,7 +69,7 @@
       color: white;
     }
 
-    .classDeleteBlack {                /*Класс для области удаленных черных фигур*/
+    .deleteBlack {                /*Класс для области удаленных черных фигур*/
       background-color: #eee;
       width: 800px;
       height: 60px;
@@ -79,7 +79,7 @@
       color: black;
     }
 
-    .classDivDelFig {                  /*Класс непосредственно для удаленных фигур*/
+    .divDelFig {                  /*Класс непосредственно для удаленных фигур*/
       width: 50px;
       height: 50px;
       float: left;
@@ -88,7 +88,7 @@
 </head>
 <body>
   <div id="divChess"></div>
-  <div class="classPrintCoord"></div>
+  <div class="printCoord"></div>
 
   <script>
     'use strict';
@@ -98,12 +98,22 @@
     function Board (n,m,idDiv) {
       var table, tr, td;
       var self = this;
+      Board.upDownRow = 'upDownRow';
+      Board.firstLastTd = 'firstLastTd';
+      Board.td = 'td';
+      Board.black = 'black';
+      Board.white = 'white';
+      Board.colorBlack = 'colorBlack';
+      Board.colorWhite = 'colorWhite';
+      Board.table = 'table';
+      Board.activeTd = 'activeTd'
+
       function upDownRow(m) {                   // Рисуем верхнюю и нижнюю строчки доски 
         tr = document.createElement('tr');      
         for (var j = 0; j < m+2; j++) {         
           td = document.createElement('td');    
           td.innerHTML = self.char[j];               
-          td.className = self.classUpDownRow;           
+          td.className = Board.upDownRow;           
           tr.appendChild(td);                   
         }                                       
         table.appendChild(tr);                  
@@ -111,7 +121,7 @@
       function firstLastTd(n, i) {              // Рисуем левое и правое поле доски с цифровым обозначением
         td = document.createElement('td');      
         td.innerHTML = n-i;                     
-        td.className = self.classFirstLastTd;           
+        td.className = Board.firstLastTd;           
         tr.appendChild(td);                     
       }
       /**
@@ -125,9 +135,9 @@
           firstLastTd(n, i);                                                              
           for (var j = 0; j < m; j++) {                                                    
             td = document.createElement('td');                                            
-            td.className = self.classTd;
+            td.className = Board.td;
             td.id = self.char[j+1] + (n-i);
-            td.classList.add((i+j)%2 ? self.classBlack : self.classWhite);                  
+            td.classList.add((i+j)%2 ? Board.black : Board.white);
             tr.appendChild(td);                                                           
           }                                                                               
           firstLastTd(n, i);                                                              
@@ -135,33 +145,34 @@
         }                                                                                 
         upDownRow(m);                                                                     
         document.getElementById(idDiv).appendChild(table);                                  
-        table.className = self.classTable;
+        table.className = Board.table;
       }
     }
       /**
        *  Создаем метод вывода фигур
        */
-      Board.prototype.printFigures = function (files, regexp) {
-        var self = this;
+      Board.prototype.printFigures = function (path) {
+        var regexp = this.regexp;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', files, true);
+        xhr.open('GET', path, true);
         xhr.send();
         xhr.onreadystatechange = function() {
           if (xhr.readyState != 4) return;
           if (xhr.status != 200) {
             alert(xhr.status + ': ' + xhr.statusText);
           } else {
-              var data = JSON.parse(xhr.responseText)
-              data.forEach(function(item) {
-                if (self.regexp.test(item.id)) {
-                  var elem = document.getElementById(item.id);
-                  elem.innerHTML == '' ? elem.innerHTML = item.imageFigure : console.log('Координаты фигуры ' + item.name + ' неправильные!');
-                  elem.classList.add(item.color == 'Black' ? self.classColorBlack : self.classColorWhite);
-                } else {
+              try {
+                var data = JSON.parse(xhr.responseText);
+                data.forEach(function(item) {
+                  if (regexp.test(item.id)) {
+                    var elem = document.getElementById(item.id);
+                    elem.innerHTML == '' ? elem.innerHTML = item.imageFigure : console.log('Координаты фигуры ' + item.name + ' неправильные!');
+                    elem.classList.add(item.color == 'Black' ? Board.colorBlack : Board.colorWhite);
+                  } else {
                     console.log('Координаты фигуры ' + item.name + ' неправильные!');
-                  }
-                
-              });
+                    }
+                });
+              } catch (e) { console.log('Не корректный формат файла!')}
             };
         }; 
       };
@@ -169,27 +180,26 @@
        *  Создаем метод удаления фигуры
        */
       Board.prototype.deleteFigures = function (id) {
-        var self = this;
         var td = document.getElementById(id.toUpperCase());
         td.innerHTML = '';
-        td.classList.remove(self.classColorBlack);
-        td.classList.remove(self.classColorWhite);
+        td.classList.remove(Board.colorBlack);
+        td.classList.remove(Board.colorWhite);
       }
       /**
        *  Создаем метод установки активной ячейки
        */
       Board.prototype.setActiveCell = function (coord) {
         var tds;
-        tds = document.getElementsByClassName(this.classActiveTd);
-        if (tds[0]) tds[0].classList.remove(this.classActiveTd);
-        document.getElementById(coord.toUpperCase()).classList.add(this.classActiveTd);
+        tds = document.getElementsByClassName(Board.activeTd);
+        if (tds[0]) tds[0].classList.remove(Board.activeTd);
+        document.getElementById(coord.toUpperCase()).classList.add(Board.activeTd);
       }
       /**
        *  Создаем метод вывода координат активной ячейки
        */
       Board.prototype.getActiveCell = function (classDiv) {
         var tds;
-        tds = document.getElementsByClassName(this.classActiveTd);
+        tds = document.getElementsByClassName(Board.activeTd);
         if (tds[0]) {
           var divs = document.getElementsByClassName(classDiv);
           divs[0].innerHTML = tds[0].id
@@ -199,12 +209,9 @@
        *  Создаем метод подписки на события
        */
       Board.prototype.on = function (event, func) {
-        var td = document.getElementsByClassName(this.classTd);
-        for (var i = 0; i < td.length; i++) {
-          td[i].addEventListener(event, func);
-        }
+        var table = document.getElementsByClassName(Board.table);
+        table[0].addEventListener(event, func);
       }
-
     /**
      * Класс конструктор
      */
@@ -215,15 +222,6 @@
        * Создаем свойства объекта
        */
       this.char = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
-      this.classUpDownRow = 'upDownRow';
-      this.classFirstLastTd = 'firstLastTd';
-      this.classTd = 'classTd';
-      this.classBlack = 'classBlack';
-      this.classWhite = 'classWhite';
-      this.classColorBlack = 'classColorBlack';
-      this.classColorWhite = 'classColorWhite';
-      this.classTable = 'classTable';
-      this.classActiveTd = 'activeTd';
       this.regexp = /^[A-H][1-8]$/;
       /**
        * Наследование шахматной доски
@@ -240,20 +238,21 @@
     chess.printChess();
     chess.printFigures('chessFigures.json');
     chess.setActiveCell('c3');
-    chess.getActiveCell('classPrintCoord');
+    chess.getActiveCell('printCoord');
 
-    function activeTd () {                              // Обработчик события - делает ячейку активной
-      chess.setActiveCell(this.id);
+    function activeTd (event) {                              // Обработчик события - делает ячейку активной
+      chess.setActiveCell(event.target.id);
     }
-    function printCoord() {                                  // Обработчик события - выводит координаты активной ячейки
-      chess.getActiveCell('classPrintCoord');
+    function print() {                                  // Обработчик события - выводит координаты активной ячейки
+      chess.getActiveCell('printCoord');
     }
-    function delFig () {                              // Обработчик события - удаляет фигуру
-      chess.deleteFigures(this.id);
+    function delFig (event) {                              // Обработчик события - удаляет фигуру
+      chess.deleteFigures(event.target.id);
     }
     chess.on('click', activeTd);
-    chess.on('click', printCoord);
+    chess.on('click', print);
     chess.on('click', delFig);
+    
 
   </script>
 </body>
