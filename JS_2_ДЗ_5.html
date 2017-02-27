@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 5 Задание 1</title>
+  <style>
+    #clock {
+      width: 200px;
+      height: 105px;
+      margin: 20px auto;
+      border: 2px solid green;
+      border-radius: 10px; 
+    }
+    .clock {
+      width: 190px;
+      height: 70px;
+      margin: 0 auto;
+      font-size: 30px;
+      text-align: center;
+      line-height: 60px;  
+    }
+    .button {
+      width: 100px;
+      height: 30px;
+      margin: 0 50px; 
+    }
+    .voter {
+      width: 200px;
+      height: 50px;
+      margin: 20px auto;
+      border: 2px solid red;
+      border-radius: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 50px;
+    }
+    .down {
+      margin-left: 10px;
+      padding: 5px 20px; 
+      text-align: center;
+      border: 1px solid blue;
+      border-radius: 10px;
+      background-color: lightgreen;
+    }
+    .vote {
+      display: inline-block;
+      text-align: center;
+      width: 70px;
+    }
+    .up {
+      margin-left: 10px;
+      padding: 5px 15px;
+      text-align: center;
+      border: 1px solid blue;
+      border-radius: 10px;
+      background-color: lightgreen;
+    }
+    .down, .up:hover {
+      cursor: pointer;
+    }
+    #canvas {
+      border: 1px solid black;
+    }
+    .canvas {
+      width: 300px;
+      margin: 0 auto; 
+    }
+  </style>
+</head>
+<body>
+  <div id="clock"></div>
+  <div id="voter" class="voter"></div>
+  <div class="canvas">
+  <canvas id="canvas" width="300" height="300"></canvas>
+  </div>
+<script>
+  // Задание 1
+  function Clock(options) {
+    var elem = options.elem;
+    function render() {
+      if (elem.contains(elem.querySelector('.clock'))) return;
+      var element = document.createElement('div');
+      element.className = 'clock';
+      elem.appendChild(element);
+      element = document.createElement('button');
+      element.innerText = 'ALERT';
+      element.className = 'button';
+      elem.appendChild(element);
+    }
+    function time() {
+      var date = new Date();
+      var hours = date.getHours() < 10 ? '0'+ date.getHours() : date.getHours();
+      var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+      var minutes = date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes();
+      var time = hours + ' : ' + minutes + ' : ' + seconds;
+      elem.querySelector('.clock').innerText = time;
+    }
+    function start() {
+      render();
+      return timerId = setInterval(time, 1000);
+    }
+    function stop() {
+      clearInterval(timerId);
+      time();
+    }
+    elem.onmousedown = function(event) {
+      if (event.target.innerText == 'ALERT') { stop() };
+    }
+    elem.onmouseup = function(event) {
+      if (event.target.innerText == 'ALERT') { start() };
+    }
+    this.start = start;
+    this.stop = stop;
+  };
+
+  var clock = new Clock({elem: document.getElementById('clock')});
+  clock.start();
+/**************************************************************/  
+  // Задание 2
+  function Voter(options) {
+    var elem = options.elem;
+    function render() {
+      var span = document.createElement('span');
+      span.className = 'down';
+      span.innerText = '-';
+      elem.appendChild(span);
+      span = document.createElement('span');
+      span.className = 'vote';
+      span.innerText = 0;
+      elem.appendChild(span);
+      span = document.createElement('span');
+      span.className = 'up';
+      span.innerText = '+';
+      elem.appendChild(span);
+    }
+    function setVote(vote) {
+      var element = elem.querySelector('.vote');
+      element.innerText = vote;
+    }
+    elem.onclick = function(event) {
+      if (event.target.innerText == '+') {
+        ++elem.querySelector('.vote').innerText
+      };
+      if (event.target.innerText == '-') {
+        elem.querySelector('.vote').innerText > 0 ?
+        --elem.querySelector('.vote').innerText : 
+        elem.querySelector('.vote').innerText
+      };
+    }
+    this.setVote = setVote;
+    render();
+  };
+
+  var voter = new Voter({elem: document.getElementById('voter')});
+  voter.setVote(125);
+/**************************************************************/
+  // Задание 3
+  function Canvas(options) {
+    var elem = options.elem;
+    var context = elem.getContext('2d');
+      if (!context) {
+        alert('Скачай нормальный браузер');
+        return;
+      };
+    function render() {
+      // Цвет обводки
+      context.strokeStyle = '#f00';
+      // Цвет заливки
+      context.fillStyle = '#ff0';
+      // Толщина линий
+      context.lineWidth   = 4;
+      // Рисуем голову. Рисование всегда начинается с beginPath
+      context.beginPath();
+      // Размечаем дугу с центром в точке (150, 150), радиусом 100px, начальным углом 0, конечным 360 градусов, рисование производится по часовой стрелке. Иными словами получаем окружность
+      context.arc(150, 150, 100, 0, 2*Math.PI, true);
+      // Обводим
+      context.stroke();
+      // Завершаем рисование
+      context.closePath(); 
+      // Начинаем рисование
+      context.beginPath();
+      // Рисуем окружность (глаз)
+      context.arc(110, 110, 15, 0, 2*Math.PI, true);          
+      // Закрашиваем
+      context.fill();
+      // Заканчиваем рисование
+      context.closePath();
+      // Рисуем второй глаз
+      context.beginPath();
+      context.arc(190, 110, 15, 0, 2*Math.PI, true);
+      context.fill();
+      context.closePath();
+      // Рисуем нос
+      context.beginPath();
+      // Функция устанавливает точку из которой будет осуществляться рисование
+      context.moveTo(150, 120);
+      // Проводит линию из установленной точки, в указанную и так же устанавливает точку из которой будет осуществляться рисование
+      context.lineTo(135, 180);
+      context.lineTo(165, 180);
+      context.stroke();
+      context.closePath();
+      // Рот
+      context.beginPath();
+      // Половинка окружности
+      context.arc(150, 150, 70, Math.PI, 2*Math.PI, true);
+      context.stroke();
+      context.closePath();
+      // Волосы – другим цветом
+      context.strokeStyle = '#000';
+      context.beginPath();
+      var x = 0;
+      var y = 0;
+      for(var i = 0; i < 5; i++)
+      {
+        context.moveTo(80 + x, 85 + y);
+        // Кривая безье
+        context.bezierCurveTo(60 + x, 60 + y, 120 + x, 40 + y, 100 + x, 0 + y);
+        context.stroke();
+        x += 15;
+        y -= 5;
+       }
+       for(var i = 0; i < 5; i++)
+      {
+        context.moveTo(80 + x, 85 + y);
+        context.bezierCurveTo(0 + x, 60 + y, 220 + x, 40 + y, 100 + x, 0 + y);
+        context.stroke();
+        x += 15;
+        y += 5;
+       }
+      context.closePath();
+    };        
+    this.print = render;
+  }
+
+  var picture = new Canvas({elem: document.getElementById('canvas')});
+  picture.print();
+</script>
+</body>
+</html>
