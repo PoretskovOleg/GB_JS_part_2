@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    meta(charset = "utf-8")
+    title Урок 7
+    //build:css css/main.css
+    link(rel="stylesheet" href="css/style.css")
+    //endbuild
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    //build:js js/main.js
+    script(src="js/tabs.js")
+    script(src="js/validator.js")
+    //endbuild
+  body
+    div.tabs
+      ul
+        li#0.li.active_li Первая вкладка
+        li#1.li.disactive_li Вторая вкладка
+        li#2.li.disactive_li Третья вкладка
+        li#3.li.disactive_li Четвертая вкладка
+      div.active_text
+        p.
+           #[b Первая вкладка]
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat odio eveniet repellat quos tempore aliquid molestiae tempora aperiam, iste doloremque! Veritatis aperiam, praesentium eius quia similique eos dolores voluptates! Vel repellat, nihil, sit dolor quo consequatur facere mollitia distinctio vitae dicta iste at. Omnis voluptatibus obcaecati, eius minus aspernatur.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+      div.disactive_text
+        p.
+           #[b Вторая вкладка] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat odio eveniet repellat quos tempore aliquid molestiae tempora aperiam, iste doloremque! Veritatis aperiam, praesentium eius quia similique eos dolores voluptates! Vel repellat, nihil, sit dolor quo consequatur facere mollitia distinctio vitae dicta iste at. Omnis voluptatibus obcaecati, eius minus aspernatur.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+      div.disactive_text
+        p.
+           #[b Третья вкладка] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat odio eveniet repellat quos tempore aliquid molestiae tempora aperiam, iste doloremque! Veritatis aperiam, praesentium eius quia similique eos dolores voluptates! Vel repellat, nihil, sit dolor quo consequatur facere mollitia distinctio vitae dicta iste at. Omnis voluptatibus obcaecati, eius minus aspernatur.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+      div.disactive_text
+        p.
+           #[b Четвертая вкладка] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat odio eveniet repellat quos tempore aliquid molestiae tempora aperiam, iste doloremque! Veritatis aperiam, praesentium eius quia similique eos dolores voluptates! Vel repellat, nihil, sit dolor quo consequatur facere mollitia distinctio vitae dicta iste at. Omnis voluptatibus obcaecati, eius minus aspernatur.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+        p.
+          Dignissimos id magni explicabo, tenetur, officiis maiores nisi cumque rerum quidem! Animi rerum ea labore, libero voluptate quibusdam deserunt rem quas aut. Omnis voluptatum sapiente saepe atque pariatur amet, soluta. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor. Aliquid deleniti accusantium illo acpcusamus doloremque facilis natus aperiam dolor.
+    div#validator
+      form#form
+        label Логин
+        #[br]
+        input(type="text" name="Username" placeholder="min 6 and max 100 simbols")
+        #[br]
+        label Пароль
+        #[br]
+        input(type="password" name="Password" placeholder="min 6 and max 100 simbols")
+        #[br]
+        label Электронная почта
+        #[br]
+        input(type="email" name="Email" placeholder="some@some.ru")
+        #[br]
+        label Пол
+        #[br]
+        input(type="text" name="Gender" placeholder="M")
+        #[br]
+        label Номер банковской карты
+        #[br]
+        input(type="text" name="Credit_Card" placeholder="9872389-2424-234224-234")
+        #[br]
+        label Дата рождения
+        #[br]
+        input(type="text" name="Birth" placeholder="yyyy-mm-dd")
+        #[br]
+        label Краткая биография
+        #[br]
+        textarea(name = "Bio" rows="5" cols="20")
+        #[br]
+        button#btn_form Отправить
